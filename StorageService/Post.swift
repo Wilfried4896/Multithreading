@@ -5,15 +5,36 @@
 //  Created by Вилфриэд Оди on 14.06.2022.
 //
 
-import Foundation
+import UIKit
 
-struct Post {
+public struct PostFeed {
+    public var title: String
     
-    static let shared = Post()
+    public init(Title title: String) {
+        self.title = title
+    }
+    
+}
+
+public struct Article {
+    public var author: String
+    public var image: String?
+    public var description: String
+    public var likes: Int
+    public var views: Int
+}
+
+public struct PhotoGameOfThrone {
+    public var image: String?
+}
+
+public struct Post {
+    
+    public static let shared = Post()
 
     private init() {}
 
-    let data: [Article] = [
+    public let data: [Article] = [
         Article(
             author: "Jean-Laurent Cassely",
             image: "Steve-Jobs",
@@ -48,11 +69,11 @@ struct Post {
      ]
 }
 
-struct Photo {
-    static let shared = Photo()
+public struct Photo {
+    public static let shared = Photo()
     private init() {}
 
-    let imageData: [PhotoGameOfThrone] = [
+    public let imageData: [PhotoGameOfThrone] = [
         PhotoGameOfThrone(
             image: "2"
         ),

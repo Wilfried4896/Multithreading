@@ -6,10 +6,11 @@
 //
 
 import UIKit
+import StorageService
 
 class FeedViewController: UIViewController {
     
-    var post = PostFeed(title: "Мой пост")
+    var post = PostFeed(Title: "Мой пост")
     let stackView = UIStackView()
 
     override func viewDidLoad() {

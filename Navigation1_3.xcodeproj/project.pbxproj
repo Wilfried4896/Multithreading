@@ -8,14 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		EC04F88C285871CC000D11AD /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC04F88B285871CC000D11AD /* PostTableViewCell.swift */; };
-		EC04F88E2858BA9B000D11AD /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC04F88D2858BA9B000D11AD /* Post.swift */; };
-		EC224859284AC950000E5F52 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC224858284AC950000E5F52 /* Data.swift */; };
 		EC5E95AE2854C9980066D549 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC5E95AD2854C9980066D549 /* LogInViewController.swift */; };
 		EC61A0AD28605895002041E3 /* MyCostumCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC61A0AC28605895002041E3 /* MyCostumCollectionCell.swift */; };
 		EC61DE6228D612EC00763700 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC61DE6128D612EC00763700 /* TabBarController.swift */; };
 		EC61DE6B28D6141A00763700 /* StorageService.h in Headers */ = {isa = PBXBuildFile; fileRef = EC61DE6A28D6141A00763700 /* StorageService.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EC61DE6E28D6141A00763700 /* StorageService.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC61DE6828D6141A00763700 /* StorageService.framework */; };
 		EC61DE6F28D6141A00763700 /* StorageService.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = EC61DE6828D6141A00763700 /* StorageService.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		EC61DE7428D6152D00763700 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC04F88D2858BA9B000D11AD /* Post.swift */; };
 		EC819988284B752F00BB7EC8 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC819987284B752F00BB7EC8 /* InfoViewController.swift */; };
 		EC819992284DC59300BB7EC8 /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC819991284DC59300BB7EC8 /* ProfileHeaderView.swift */; };
 		EC8DEF60285CA53D00B25A65 /* PhotosTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8DEF5F285CA53D00B25A65 /* PhotosTableViewCell.swift */; };
@@ -56,7 +55,6 @@
 /* Begin PBXFileReference section */
 		EC04F88B285871CC000D11AD /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
 		EC04F88D2858BA9B000D11AD /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
-		EC224858284AC950000E5F52 /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		EC5E95AD2854C9980066D549 /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		EC61A0AC28605895002041E3 /* MyCostumCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCostumCollectionCell.swift; sourceTree = "<group>"; };
 		EC61DE6128D612EC00763700 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
@@ -115,8 +113,6 @@
 		EC5E95AA2853EFAE0066D549 /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				EC224858284AC950000E5F52 /* Data.swift */,
-				EC04F88D2858BA9B000D11AD /* Post.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -124,6 +120,7 @@
 		EC61DE6928D6141A00763700 /* StorageService */ = {
 			isa = PBXGroup;
 			children = (
+				EC04F88D2858BA9B000D11AD /* Post.swift */,
 				EC61DE6A28D6141A00763700 /* StorageService.h */,
 			);
 			path = StorageService;
@@ -291,6 +288,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EC61DE7428D6152D00763700 /* Post.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -299,7 +297,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				ECDE86CB2848F6D3004A0B1E /* PostViewController.swift in Sources */,
-				EC224859284AC950000E5F52 /* Data.swift in Sources */,
 				EC61A0AD28605895002041E3 /* MyCostumCollectionCell.swift in Sources */,
 				EC61DE6228D612EC00763700 /* TabBarController.swift in Sources */,
 				ECDE86B32848935A004A0B1E /* AppDelegate.swift in Sources */,
@@ -312,7 +309,6 @@
 				EC819988284B752F00BB7EC8 /* InfoViewController.swift in Sources */,
 				EC8DEF62285CC02C00B25A65 /* PhotosViewController.swift in Sources */,
 				ECDE86C928489E2F004A0B1E /* ProfileViewController.swift in Sources */,
-				EC04F88E2858BA9B000D11AD /* Post.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -519,6 +515,7 @@
 		ECDE86C42848935C004A0B1E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
@@ -548,6 +545,7 @@
 		ECDE86C52848935C004A0B1E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
