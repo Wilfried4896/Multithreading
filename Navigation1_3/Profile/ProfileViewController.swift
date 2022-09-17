@@ -30,8 +30,21 @@ class ProfileViewController: UIViewController {
         super.viewDidLoad()
         setUpView()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.navigationController?.navigationBar.isHidden = true
+    }
+    
     func setUpView() {
-        self.view.backgroundColor = .systemGroupedBackground
+        
+        #if DEBUG
+            self.view.backgroundColor = .systemGroupedBackground
+        #else
+            self.view.backgroundColor = .systemPurple
+        #endif
+        
         self.view.addSubview(profileTableHederView)
 
         NSLayoutConstraint.activate([
