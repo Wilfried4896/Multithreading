@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SnapKit
 
 class ProfileHeaderView: UITableViewHeaderFooterView {
 
@@ -14,7 +15,6 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
     private lazy var avatarImageView: UIImageView = {
         let imageProfile = UIImageView()
         imageProfile.image = UIImage(named: "fleur")
-        imageProfile.translatesAutoresizingMaskIntoConstraints = false
         imageProfile.layer.cornerRadius = 60
         imageProfile.layer.masksToBounds = true
         imageProfile.layer.borderWidth = 3
@@ -28,7 +28,6 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
         name.text = "WIlfried Odi"
         name.textColor = .black
         name.font = .systemFont(ofSize: 18, weight: .bold)
-        name.translatesAutoresizingMaskIntoConstraints = false
 
         return name
     }()
@@ -37,7 +36,6 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
         let show = UIButton()
         show.setTitle("Set status", for: .normal)
         show.backgroundColor = .systemBlue
-        show.translatesAutoresizingMaskIntoConstraints = false
         show.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
         show.layer.cornerRadius = 10
         show.layer.shadowRadius = 4
@@ -54,7 +52,6 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
         textFiel.textColor = .black
         textFiel.backgroundColor = .white
         textFiel.addTarget(self, action: #selector(statusTextChanged), for: .editingChanged)
-        textFiel.translatesAutoresizingMaskIntoConstraints = false
         textFiel.layer.borderColor = UIColor.black.cgColor
         textFiel.layer.borderWidth = 1
         textFiel.layer.cornerRadius = 10
@@ -69,7 +66,6 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
         text.text = "Waiting for something..."
         text.textColor = .gray
         text.font = .systemFont(ofSize: 14, weight: .regular)
-        text.translatesAutoresizingMaskIntoConstraints = false
 
         return text
     }()
@@ -100,35 +96,38 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
            addSubview($0)
         })
         
-        NSLayoutConstraint.activate([
-            // avatarImageViewConstraint
-            self.avatarImageView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant:  16),
-            self.avatarImageView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 16),
-            self.avatarImageView.heightAnchor.constraint(equalToConstant: 120),
-            self.avatarImageView.widthAnchor.constraint(equalToConstant: 120),
-
-            // fullNameLabelConstraint
-            self.fullNameLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 27),
-            self.fullNameLabel.leadingAnchor.constraint(equalTo: self.avatarImageView.trailingAnchor, constant: 13),
-
-            // statusLabelConstraint
-            self.statusLabel.bottomAnchor.constraint(equalTo: self.setStatusButton.topAnchor, constant: -55),
-            self.statusLabel.leadingAnchor.constraint(equalTo: self.avatarImageView.trailingAnchor, constant: 13),
-            self.statusLabel.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -16),
-
-            // statusTextFieldConstraint
-            self.statusTextField.bottomAnchor.constraint(equalTo: self.setStatusButton.topAnchor, constant: -10),
-            self.statusTextField.leadingAnchor.constraint(equalTo: self.avatarImageView.trailingAnchor, constant: 13),
-            self.statusTextField.heightAnchor.constraint(equalToConstant: 40),
-            self.statusTextField.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -16),
-
-            // setStatusButtonConstraint
-            self.setStatusButton.topAnchor.constraint(equalTo: self.avatarImageView.bottomAnchor, constant: 16),
-            self.setStatusButton.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 16),
-            self.setStatusButton.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -16),
-            self.setStatusButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -16),
-            self.setStatusButton.heightAnchor.constraint(equalToConstant: 50),
-        ])
+        // SnapKit Contraintes
+        
+        avatarImageView.snp.makeConstraints { make in
+            make.top.leading.equalTo(safeAreaLayoutGuide).inset(16)
+            make.size.equalTo(120)
+        }
+        
+        fullNameLabel.snp.makeConstraints { make in
+            make.top.equalTo(safeAreaLayoutGuide).inset(27)
+            make.leading.equalTo(avatarImageView.snp.trailing).offset(13)
+        }
+        
+        statusLabel.snp.makeConstraints { make in
+            make.bottom.equalTo(setStatusButton.snp.top).inset(-55)
+            make.leading.equalTo(avatarImageView.snp.trailing).offset(13)
+            make.trailing.equalTo(safeAreaLayoutGuide.snp.trailing).offset(-16)
+        }
+        
+        statusTextField.snp.makeConstraints { make in
+            make.bottom.equalTo(setStatusButton.snp.top).inset(-10)
+            make.leading.equalTo(avatarImageView.snp.trailing).offset(13)
+            make.height.equalTo(40)
+            make.trailing.equalTo(safeAreaLayoutGuide.snp.trailing).offset(-16)
+        }
+        
+        setStatusButton.snp.makeConstraints { make in
+            make.trailing.equalTo(safeAreaLayoutGuide).offset(-16)
+            make.leading.equalTo(safeAreaLayoutGuide).inset(16)
+            make.bottom.equalTo(safeAreaLayoutGuide).inset(16)
+            make.top.equalTo(avatarImageView.snp.bottom).offset(16)
+            make.height.equalTo(50)
+        }
     }
 }
 extension ProfileHeaderView: UITextFieldDelegate {
@@ -137,4 +136,3 @@ extension ProfileHeaderView: UITextFieldDelegate {
         return true 
     }
 }
-
