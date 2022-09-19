@@ -121,7 +121,6 @@
 				CFC1C6B437879FBF132EFF66 /* Pods-StorageService.debug.xcconfig */,
 				8FD375A8C71D718B99E8CF22 /* Pods-StorageService.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -139,13 +138,6 @@
 				ECDE86D02848F7FD004A0B1E /* FeedViewController.swift */,
 			);
 			path = Feed;
-			sourceTree = "<group>";
-		};
-		EC5E95AA2853EFAE0066D549 /* Data */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Data;
 			sourceTree = "<group>";
 		};
 		EC61DE6928D6141A00763700 /* StorageService */ = {
@@ -195,7 +187,6 @@
 		ECDE86B12848935A004A0B1E /* Navigation1_3 */ = {
 			isa = PBXGroup;
 			children = (
-				EC5E95AA2853EFAE0066D549 /* Data */,
 				EC317D6E2855BD9100581DC5 /* Feed */,
 				EC317D6D2855BD5B00581DC5 /* Post */,
 				EC819990284DC49400BB7EC8 /* Profile */,
