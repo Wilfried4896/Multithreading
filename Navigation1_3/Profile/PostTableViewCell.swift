@@ -17,7 +17,7 @@ class PostTableViewCell: UITableViewCell {
         return stackView
     }()
 
-    private lazy var authorLabel: UILabel = {
+    lazy var authorLabel: UILabel = {
         let author = UILabel()
         author.font = .systemFont(ofSize: 20, weight: .bold)
         author.textColor = .black
@@ -35,7 +35,7 @@ class PostTableViewCell: UITableViewCell {
         return description
     }()
 
-    private lazy var imageArticle: UIImageView = {
+    lazy var imageArticle: UIImageView = {
         let avatare = UIImageView()
         avatare.contentMode = .scaleAspectFit
         avatare.backgroundColor = .black

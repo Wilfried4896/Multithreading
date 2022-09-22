@@ -39,8 +39,10 @@ class LogInViewController: UIViewController {
     }()
 
     private lazy var logInButton: UIButton = {
-        let logIn = UIButton()
+        let logIn = UIButton(type: .system)
         logIn.backgroundColor = UIColor(patternImage: UIImage(named: "blue_pixel")!)
+        logIn.setTitleColor(UIColor.white, for: .normal)
+        logIn.titleLabel?.font = UIFont.systemFont(ofSize: 20)
         logIn.setTitle("Log In", for: .normal)
         logIn.layer.cornerRadius = 10
         logIn.translatesAutoresizingMaskIntoConstraints = false
@@ -143,7 +145,23 @@ class LogInViewController: UIViewController {
     }
 
     @objc func openProfile() {
-        navigationController?.pushViewController(ProfileViewController(), animated: true)
+        let profileVC = ProfileViewController()
+        
+        #if DEBUG
+        guard let loginIn = emailLogin.text else { return }
+        let currentService = CurrentUserService(userCurrent: profileVC.userCurrent).loginIn(login: loginIn)
+            guard let currentLog = currentService else { return }
+            profileVC.userCurrent = currentLog
+            navigationController?.pushViewController(profileVC, animated: true)
+        
+        #else
+        guard let loginIn = emailLogin.text else { return }
+        let currentService = TestUserService(userCurrent: profileVC.userCurrent).loginIn(login: loginIn)
+            guard let currentLog = currentService else { return }
+            profileVC.userCurrent = currentLog
+            navigationController?.pushViewController(profileVC, animated: true)
+        #endif
+        
     }
 }
 
