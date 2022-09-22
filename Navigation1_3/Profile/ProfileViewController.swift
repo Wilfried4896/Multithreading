@@ -9,6 +9,10 @@ import UIKit
 import StorageService
 
 class ProfileViewController: UIViewController {
+    
+    private let article: [Article] = Post.shared.data
+    var userCurrent: User = User(login: "login", fullName: "Владимир Путин",
+                                 avatar: UIImage(named: "Vladimir-Poutine"), status: "Онлайн")
 
     private lazy var profileTableHederView: UITableView = {
         let profileTable = UITableView(frame: .zero, style: .grouped)
@@ -25,10 +29,15 @@ class ProfileViewController: UIViewController {
         return profileTable
     }()
 
-    private let article: [Article] = Post.shared.data
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .white
+//        #if DEBUG
+//            setUpView()
+//        #else
+//            setUpRelease()
+//        #endif
         setUpView()
     }
     
@@ -38,13 +47,7 @@ class ProfileViewController: UIViewController {
         self.navigationController?.navigationBar.isHidden = true
     }
     
-    func setUpView() {
-        
-        #if DEBUG
-            self.view.backgroundColor = .systemGroupedBackground
-        #else
-            self.view.backgroundColor = .systemPurple
-        #endif
+   private func setUpView() {
         
         self.view.addSubview(profileTableHederView)
 
@@ -55,8 +58,23 @@ class ProfileViewController: UIViewController {
             profileTableHederView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             profileTableHederView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
-
     }
+    
+//    private func setUpRelease() {
+//        let profileHeaderView = ProfileHeaderView()
+//        profileHeaderView.fullNameLabel.text = userCurrent.fullName
+//        profileHeaderView.statusLabel.text = userCurrent.status
+//        //postTableViewCell.imageArticle.image = userCurrent.avatar
+//
+//        view.addSubview(profileHeaderView.fullNameLabel)
+//        view.addSubview(profileHeaderView.statusLabel)
+//
+//        NSLayoutConstraint.activate([
+//            profileHeaderView.fullNameLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+//            profileHeaderView.fullNameLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+//            profileHeaderView.statusLabel.topAnchor.constraint(equalTo: profileHeaderView.fullNameLabel.bottomAnchor, constant: 20)
+//        ])
+//    }
 }
 
 extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
@@ -102,6 +120,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
             case 0:
                 guard  let profileHeader = tableView.dequeueReusableHeaderFooterView(withIdentifier: "Profile") as? ProfileHeaderView else { return nil }
                 tableView.backgroundColor = .systemGroupedBackground
+                profileHeader.configurationProfile(profile: userCurrent)
                 return profileHeader
 
             default:
