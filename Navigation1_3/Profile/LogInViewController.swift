@@ -148,19 +148,15 @@ class LogInViewController: UIViewController {
         let profileVC = ProfileViewController()
         
         #if DEBUG
-        guard let loginIn = emailLogin.text else { return }
-        let currentService = CurrentUserService(userCurrent: profileVC.userCurrent).loginIn(login: loginIn)
-            guard let currentLog = currentService else { return }
-            profileVC.userCurrent = currentLog
-            navigationController?.pushViewController(profileVC, animated: true)
-        
+            guard let loginIn = emailLogin.text else { return }
         #else
-        guard let loginIn = emailLogin.text else { return }
-        let currentService = TestUserService(userCurrent: profileVC.userCurrent).loginIn(login: loginIn)
-            guard let currentLog = currentService else { return }
+            guard let loginIn = emailLogin.text else { return }
+        #endif
+        
+        let testService = TestUserService(userTest: profileVC.userCurrent).loginIn(login: loginIn)
+            guard let currentLog = testService else { return }
             profileVC.userCurrent = currentLog
             navigationController?.pushViewController(profileVC, animated: true)
-        #endif
         
     }
 }

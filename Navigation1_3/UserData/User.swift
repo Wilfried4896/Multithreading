@@ -43,15 +43,15 @@ class CurrentUserService: UserService {
 }
 
 class TestUserService: UserService {
-    let userCurrent: User
+    let userTest: User
     
-    init(userCurrent: User) {
-        self.userCurrent = userCurrent
+    init(userTest: User) {
+        self.userTest = userTest
     }
     
     func loginIn(login: String) -> User? {
-        guard login == userCurrent.login else { return nil }
+        guard login == userTest.login else { return nil }
         
-        return userCurrent
+        return userTest
     }
 }
