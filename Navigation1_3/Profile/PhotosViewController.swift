@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import StorageService
 
 class PhotosViewController: UIViewController {
 
@@ -33,9 +34,14 @@ class PhotosViewController: UIViewController {
 
         setUpphotosCollection()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        navigationController?.navigationBar.isHidden = false
+    }
 
     private func setUpphotosCollection() {
-        navigationController?.navigationBar.isHidden = false
         navigationItem.title = "Photos Gallery"
         view.addSubview(photosCollectionView)
 
