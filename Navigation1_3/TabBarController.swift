@@ -18,7 +18,7 @@ class TabBarController: UITabBarController {
     }()
 
     let profilNav: UINavigationController = {
-        let profilNav = UINavigationController(rootViewController: LogInViewController())
+        let profilNav = UINavigationController(rootViewController: ProfileViewController())
         profilNav.tabBarItem = UITabBarItem(title: "Профиль", image: UIImage(systemName: "person.fill"), tag: 1)
 
         return profilNav

@@ -11,8 +11,8 @@ import StorageService
 class ProfileViewController: UIViewController {
     
     private let article: [Article] = Post.shared.data
-    var userCurrent: User = User(login: "login", fullName: "Владимир Путин",
-                                 avatar: UIImage(named: "Vladimir-Poutine"), status: "Онлайн")
+    var userCurrent: User = User(login: "login", fullName: "Kali-Linux",
+                                 avatar: UIImage(named: "Kali-Linux"), status: "Онлайн")
 
     private lazy var profileTableHederView: UITableView = {
         let profileTable = UITableView(frame: .zero, style: .grouped)

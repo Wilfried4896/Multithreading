@@ -9,6 +9,8 @@ import UIKit
 
 class LogInViewController: UIViewController {
 
+    var loginDelegate: LoginFactory?
+    
     private lazy var scrollViewLogin: UIScrollView = {
         let scrollLogin = UIScrollView()
         scrollLogin.translatesAutoresizingMaskIntoConstraints = false
@@ -52,6 +54,7 @@ class LogInViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
         setUpLogInView()
     }
 
@@ -61,7 +64,8 @@ class LogInViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(self.didShowKeyboard(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.didHidekeyboard(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
-
+    
+    
     private func setUpLogInView() {
         self.view.backgroundColor = .white
         self.view.addSubview(scrollViewLogin)
@@ -145,19 +149,38 @@ class LogInViewController: UIViewController {
     }
 
     @objc func openProfile() {
-        let profileVC = ProfileViewController()
         
-        #if DEBUG
-            guard let loginIn = emailLogin.text else { return }
-        #else
-            guard let loginIn = emailLogin.text else { return }
-        #endif
+        //        #if DEBUG
+        //            guard let loginIn = emailLogin.text else { return }
+        //        #else
+        //            guard let loginIn = emailLogin.text else { return }
+        //        #endif
+        //
+        //        let testService = TestUserService(userTest: profileVC.userCurrent).loginIn(login: loginIn)
+        //            guard let currentLog = testService else { return }
+        //            profileVC.userCurrent = currentLog
         
-        let testService = TestUserService(userTest: profileVC.userCurrent).loginIn(login: loginIn)
-            guard let currentLog = testService else { return }
-            profileVC.userCurrent = currentLog
-            navigationController?.pushViewController(profileVC, animated: true)
+        guard let emailLogin = emailLogin.text, let passwordLogin = passwordLogin.text else { return }
+
+        let profileVC = TabBarController()
+
+        let messageError = UIAlertController(title: "Внимание", message: "Логин или пароль некорректен", preferredStyle: .actionSheet)
+        let actionMessage = UIAlertAction(title: "OK", style: .destructive)
+
+        let loginInspector = loginDelegate?.makeLoginInspector()
         
+        let verifiedCurrent = loginInspector?.check(loginUser: emailLogin, passwordUser: passwordLogin)
+        
+        guard let verifiedCurrent = verifiedCurrent else { return }
+            
+        guard verifiedCurrent else {
+            messageError.addAction(actionMessage)
+            present(messageError, animated: true)
+
+            return
+        }
+        
+        UIApplication.shared.delegate?.window??.rootViewController = profileVC
     }
 }
 

@@ -14,11 +14,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
-        self.window = UIWindow(frame: UIScreen.main.bounds)
-
-        self.window?.rootViewController = TabBarController()
-        self.window?.makeKeyAndVisible()
-        self.window?.backgroundColor = .systemBackground
+        
+        let loginFactory = MyLoginFactory(loginInspector: LoginInspector())
+        
+        let logInViewController = LogInViewController()
+        logInViewController.loginDelegate = loginFactory
+        
+        let window = UIWindow(frame: UIScreen.main.bounds)
+        window.rootViewController = logInViewController
+        window.makeKeyAndVisible()
+        
+        self.window = window
+        self.window?.backgroundColor = .white
 
         return true
     }
