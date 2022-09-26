@@ -92,11 +92,9 @@ class Checker: LoginViewControllerDelegate {
     private var password: String = "password"
     
     func check(loginUser: String, passwordUser: String) -> Bool {
-        let correctLoginPassword: Bool = false
         
-        guard loginUser == self.login && passwordUser == self.password else {
-            return correctLoginPassword }
-        
-        return !correctLoginPassword
+        var correctLoginPassword = loginUser == login && passwordUser == password
+        print(correctLoginPassword)
+        return correctLoginPassword
     }
 }
