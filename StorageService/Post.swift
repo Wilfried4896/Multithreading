@@ -24,7 +24,7 @@ public struct Article {
     public var views: Int
 }
 
-public struct PhotoGameOfThrone {
+public struct PhotoGame {
     public var image: String?
 }
 
@@ -65,34 +65,26 @@ public struct Photo {
     public static let shared = Photo()
     private init() {}
 
-    public let imageData: [PhotoGameOfThrone] = [
-        PhotoGameOfThrone(
-            image: "2"
-        ),
-
-        PhotoGameOfThrone(
-            image: "3"
-        ),
-
-        PhotoGameOfThrone(
-            image: "4"
-        ),
-
-        PhotoGameOfThrone(
-            image: "5"
-        ),
-
-        PhotoGameOfThrone(
-            image: "Kali-Linux"
-        ),
-
-        PhotoGameOfThrone(
-            image: "basilique"
-        ),
-
-        PhotoGameOfThrone(
-            image: "Steve-Jobs"
-        ),
-
+    public let imageData: [PhotoGame] = [
+        PhotoGame(image: "2"), PhotoGame(image: "3"),PhotoGame(image:"4"),PhotoGame(image: "5"),PhotoGame(image:"Kali-Linux"),PhotoGame(image: "basilique"),PhotoGame(image: "Steve-Jobs"),
     ]
+    
+    public static func iamgesGalery() -> [UIImage] {
+        var galery = [UIImage]()
+        
+        let data = ["images.jpeg","images-2.jpeg", "images-3.jpeg", "images-4.jpeg", "images-5.jpeg",
+                    "images-6.jpeg", "images-7.jpeg", "images-8.jpeg", "images-9.jpeg", "images-10.jpeg",
+                    "images-11.jpeg", "images-12.jpeg", "images-13.jpeg", "images-14.jpeg", "images-15.jpeg",
+                    "images-16.jpeg", "images-17.jpeg", "images-18.jpeg", "images-19.jpeg", "images-20.jpeg",
+                    "images-21.jpeg",
+        ]
+        
+        for name in data {
+            galery.append(UIImage(named: name)! )
+        }
+        
+        return galery
+    }
+   
 }
+

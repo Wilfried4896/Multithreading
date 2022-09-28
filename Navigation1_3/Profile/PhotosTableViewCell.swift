@@ -10,7 +10,7 @@ import StorageService
 
 class PhotosTableViewCell: UITableViewCell {
 
-    private let photoGameOfThrone: [PhotoGameOfThrone] = Photo.shared.imageData
+    private let photoGameOfThrone: [PhotoGame] = Photo.shared.imageData
     
     private enum Constants {
         static let numberInItem: CGFloat = 3

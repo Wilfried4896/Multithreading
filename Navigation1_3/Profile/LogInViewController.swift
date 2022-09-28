@@ -171,7 +171,7 @@ class LogInViewController: UIViewController {
         
         let verifiedCurrent = loginInspector?.check(loginUser: emailLogin, passwordUser: passwordLogin)
         
-        guard let verifiedCurrent = verifiedCurrent else { return }
+        guard let verifiedCurrent else { return }
             
         guard verifiedCurrent else {
             messageError.addAction(actionMessage)

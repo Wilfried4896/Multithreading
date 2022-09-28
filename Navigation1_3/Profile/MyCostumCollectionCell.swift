@@ -36,8 +36,8 @@ class MyCostumCollectionCell: UICollectionViewCell {
             photoImage.trailingAnchor.constraint(equalTo: trailingAnchor),
         ])
     }
-
-    func setUpPhoto(with photo: PhotoGameOfThrone) {
-        photoImage.image = UIImage(named: "\(photo.image ?? "placeholder")")
+    
+    func setUpPhoto(with album: PhotoGame) {
+        photoImage.image = UIImage(named: "\(album.image ?? "placeholder")")
     }
 }

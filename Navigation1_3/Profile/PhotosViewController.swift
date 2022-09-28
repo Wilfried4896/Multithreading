@@ -7,10 +7,16 @@
 
 import UIKit
 import StorageService
+import iOSIntPackage
 
 class PhotosViewController: UIViewController {
 
-    private let photoGalery: [PhotoGameOfThrone] = Photo.shared.imageData
+    private let photoGalery: [PhotoGame] = Photo.shared.imageData
+    private var galery = [UIImage]()
+    
+    private let imageGalery = Photo.iamgesGalery()
+    let imagePublisherFacade = ImagePublisherFacade()
+    
     private enum ConstantInterval {
         static let instant: CGFloat = 3
     }
@@ -44,6 +50,9 @@ class PhotosViewController: UIViewController {
     private func setUpphotosCollection() {
         navigationItem.title = "Photos Gallery"
         view.addSubview(photosCollectionView)
+        
+        imagePublisherFacade.subscribe(self)
+        imagePublisherFacade.addImagesWithTimer(time: 0.5, repeat: 20, userImages: imageGalery)
 
         NSLayoutConstraint.activate([
             photosCollectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
@@ -56,7 +65,7 @@ class PhotosViewController: UIViewController {
 
 extension PhotosViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return photoGalery.count
+        return galery.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -65,8 +74,8 @@ extension PhotosViewController: UICollectionViewDelegateFlowLayout, UICollection
             return cellDefault
         }
 
-        let album = photoGalery[indexPath.row]
-        cellGalery.setUpGalery(with: album)
+//        let album = galery[indexPath.row]
+        cellGalery.setUpPhoto(photo: galery[indexPath.item])
         return cellGalery
     }
 
@@ -78,5 +87,14 @@ extension PhotosViewController: UICollectionViewDelegateFlowLayout, UICollection
         let itemWight = floor(needWidth / ConstantInterval.instant)
 
         return CGSize(width: itemWight, height: itemWight)
+    }
+}
+
+
+extension PhotosViewController: ImageLibrarySubscriber {
+    
+    func receive(images: [UIImage]) {
+        galery = images
+        photosCollectionView.reloadData()
     }
 }

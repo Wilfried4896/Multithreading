@@ -17,7 +17,7 @@ class ProfileViewController: UIViewController {
     private lazy var profileTableHederView: UITableView = {
         let profileTable = UITableView(frame: .zero, style: .grouped)
         profileTable.rowHeight = UITableView.automaticDimension
-        profileTable.estimatedRowHeight = 10
+        profileTable.estimatedRowHeight = 20
         profileTable.register(ProfileHeaderView.self, forHeaderFooterViewReuseIdentifier: "Profile")
         profileTable.register(PostTableViewCell.self, forCellReuseIdentifier: "PostCell")
         profileTable.register(PhotosTableViewCell.self, forCellReuseIdentifier: "PhotoCell")
@@ -42,7 +42,7 @@ class ProfileViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+        super.viewWillAppear(true)
         
         self.navigationController?.navigationBar.isHidden = true
     }
@@ -59,22 +59,6 @@ class ProfileViewController: UIViewController {
             profileTableHederView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
     }
-    
-//    private func setUpRelease() {
-//        let profileHeaderView = ProfileHeaderView()
-//        profileHeaderView.fullNameLabel.text = userCurrent.fullName
-//        profileHeaderView.statusLabel.text = userCurrent.status
-//        //postTableViewCell.imageArticle.image = userCurrent.avatar
-//
-//        view.addSubview(profileHeaderView.fullNameLabel)
-//        view.addSubview(profileHeaderView.statusLabel)
-//
-//        NSLayoutConstraint.activate([
-//            profileHeaderView.fullNameLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-//            profileHeaderView.fullNameLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-//            profileHeaderView.statusLabel.topAnchor.constraint(equalTo: profileHeaderView.fullNameLabel.bottomAnchor, constant: 20)
-//        ])
-//    }
 }
 
 extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
