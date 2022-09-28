@@ -6,13 +6,18 @@
 //
 
 import UIKit
+import StorageService
 
 class ProfileViewController: UIViewController {
+    
+    private let article: [Article] = Post.shared.data
+    var userCurrent: User = User(login: "login", fullName: "Kali-Linux",
+                                 avatar: UIImage(named: "Kali-Linux"), status: "Онлайн")
 
     private lazy var profileTableHederView: UITableView = {
         let profileTable = UITableView(frame: .zero, style: .grouped)
         profileTable.rowHeight = UITableView.automaticDimension
-        profileTable.estimatedRowHeight = 10
+        profileTable.estimatedRowHeight = 20
         profileTable.register(ProfileHeaderView.self, forHeaderFooterViewReuseIdentifier: "Profile")
         profileTable.register(PostTableViewCell.self, forCellReuseIdentifier: "PostCell")
         profileTable.register(PhotosTableViewCell.self, forCellReuseIdentifier: "PhotoCell")
@@ -24,14 +29,26 @@ class ProfileViewController: UIViewController {
         return profileTable
     }()
 
-    private let article: [Article] = Post.shared.data
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .white
+//        #if DEBUG
+//            setUpView()
+//        #else
+//            setUpRelease()
+//        #endif
         setUpView()
     }
-    func setUpView() {
-        self.view.backgroundColor = .systemGroupedBackground
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        
+        self.navigationController?.navigationBar.isHidden = true
+    }
+    
+   private func setUpView() {
+        
         self.view.addSubview(profileTableHederView)
 
         NSLayoutConstraint.activate([
@@ -41,7 +58,6 @@ class ProfileViewController: UIViewController {
             profileTableHederView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             profileTableHederView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
-
     }
 }
 
@@ -88,6 +104,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
             case 0:
                 guard  let profileHeader = tableView.dequeueReusableHeaderFooterView(withIdentifier: "Profile") as? ProfileHeaderView else { return nil }
                 tableView.backgroundColor = .systemGroupedBackground
+                profileHeader.configurationProfile(profile: userCurrent)
                 return profileHeader
 
             default:

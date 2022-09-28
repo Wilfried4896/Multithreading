@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import StorageService
 
 class PhotosCollectionViewCell: UICollectionViewCell {
 
@@ -38,7 +39,11 @@ class PhotosCollectionViewCell: UICollectionViewCell {
         ])
     }
 
-    func setUpGalery(with album: PhotoGameOfThrone) {
+    func setUpGalery(with album: PhotoGame) {
         galeryAlbum.image = UIImage(named: "\(album.image ?? "placeholder")")
+    }
+    
+    func setUpPhoto(photo: UIImage) {
+        galeryAlbum.image = photo
     }
 }

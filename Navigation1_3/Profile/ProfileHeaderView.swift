@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import StorageService
 
 class ProfileHeaderView: UITableViewHeaderFooterView {
 
@@ -13,7 +14,6 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
 
     private lazy var avatarImageView: UIImageView = {
         let imageProfile = UIImageView()
-        imageProfile.image = UIImage(named: "fleur")
         imageProfile.translatesAutoresizingMaskIntoConstraints = false
         imageProfile.layer.cornerRadius = 60
         imageProfile.layer.masksToBounds = true
@@ -23,9 +23,8 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
         return imageProfile
     }()
 
-    private lazy var fullNameLabel: UILabel = {
+    lazy var fullNameLabel: UILabel = {
         let name = UILabel()
-        name.text = "WIlfried Odi"
         name.textColor = .black
         name.font = .systemFont(ofSize: 18, weight: .bold)
         name.translatesAutoresizingMaskIntoConstraints = false
@@ -64,9 +63,8 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
         return textFiel
     }()
 
-    private lazy var statusLabel: UILabel = {
+    lazy var statusLabel: UILabel = {
         let text = UILabel()
-        text.text = "Waiting for something..."
         text.textColor = .gray
         text.font = .systemFont(ofSize: 14, weight: .regular)
         text.translatesAutoresizingMaskIntoConstraints = false
@@ -130,7 +128,14 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
             self.setStatusButton.heightAnchor.constraint(equalToConstant: 50),
         ])
     }
+    
+    func configurationProfile(profile: User) {
+        avatarImageView.image = profile.avatar
+        fullNameLabel.text = profile.fullName
+        statusLabel.text = profile.status
+    }
 }
+
 extension ProfileHeaderView: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
