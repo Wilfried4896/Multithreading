@@ -25,7 +25,7 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
 
     lazy var fullNameLabel: UILabel = {
         let name = UILabel()
-        name.textColor = .black
+        //name.textColor = .black
         name.font = .systemFont(ofSize: 18, weight: .bold)
         name.translatesAutoresizingMaskIntoConstraints = false
 

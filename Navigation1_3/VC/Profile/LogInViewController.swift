@@ -114,7 +114,7 @@ class LogInViewController: UIViewController {
         textField.layer.cornerRadius = 10
         textField.layer.borderColor = UIColor.lightGray.cgColor
         textField.layer.borderWidth = 0.5
-        textField.textColor = UIColor.black
+        //textField.textColor = UIColor.black
         textField.backgroundColor = UIColor.systemGray6
         textField.autocapitalizationType = .none
         textField.font = .systemFont(ofSize: 16)

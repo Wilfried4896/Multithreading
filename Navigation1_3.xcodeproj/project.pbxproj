@@ -98,6 +98,38 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		EC13E9B928E4E9D300059FB4 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				ECDE86B22848935A004A0B1E /* AppDelegate.swift */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		EC13E9BA28E4EA0100059FB4 /* VC */ = {
+			isa = PBXGroup;
+			children = (
+				EC819987284B752F00BB7EC8 /* InfoViewController.swift */,
+				EC61DE6128D612EC00763700 /* TabBarController.swift */,
+				EC819990284DC49400BB7EC8 /* Profile */,
+				EC317D6D2855BD5B00581DC5 /* Post */,
+				EC317D6E2855BD9100581DC5 /* Feed */,
+			);
+			path = VC;
+			sourceTree = "<group>";
+		};
+		EC13E9BB28E4EA1900059FB4 /* ViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				EC8DEF5F285CA53D00B25A65 /* PhotosTableViewCell.swift */,
+				EC61A0AC28605895002041E3 /* MyCostumCollectionCell.swift */,
+				EC8DEF63285CC0AF00B25A65 /* PhotosCollectionViewCell.swift */,
+				EC819991284DC59300BB7EC8 /* ProfileHeaderView.swift */,
+				EC04F88B285871CC000D11AD /* PostTableViewCell.swift */,
+			);
+			path = ViewCell;
+			sourceTree = "<group>";
+		};
 		EC317D6D2855BD5B00581DC5 /* Post */ = {
 			isa = PBXGroup;
 			children = (
@@ -127,13 +159,8 @@
 			isa = PBXGroup;
 			children = (
 				ECDE86C828489E2F004A0B1E /* ProfileViewController.swift */,
-				EC04F88B285871CC000D11AD /* PostTableViewCell.swift */,
-				EC819991284DC59300BB7EC8 /* ProfileHeaderView.swift */,
 				EC5E95AD2854C9980066D549 /* LogInViewController.swift */,
-				EC8DEF5F285CA53D00B25A65 /* PhotosTableViewCell.swift */,
 				EC8DEF61285CC02C00B25A65 /* PhotosViewController.swift */,
-				EC8DEF63285CC0AF00B25A65 /* PhotosCollectionViewCell.swift */,
-				EC61A0AC28605895002041E3 /* MyCostumCollectionCell.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -150,7 +177,6 @@
 			isa = PBXGroup;
 			children = (
 				ECDE86B12848935A004A0B1E /* Navigation1_3 */,
-				EC61DE6928D6141A00763700 /* StorageService */,
 				ECDE86B02848935A004A0B1E /* Products */,
 			);
 			sourceTree = "<group>";
@@ -167,13 +193,11 @@
 		ECDE86B12848935A004A0B1E /* Navigation1_3 */ = {
 			isa = PBXGroup;
 			children = (
+				EC61DE6928D6141A00763700 /* StorageService */,
+				EC13E9BB28E4EA1900059FB4 /* ViewCell */,
+				EC13E9BA28E4EA0100059FB4 /* VC */,
+				EC13E9B928E4E9D300059FB4 /* Application */,
 				ECA2B87E28D9D1CC003677D1 /* UserData */,
-				EC317D6E2855BD9100581DC5 /* Feed */,
-				EC317D6D2855BD5B00581DC5 /* Post */,
-				EC819990284DC49400BB7EC8 /* Profile */,
-				ECDE86B22848935A004A0B1E /* AppDelegate.swift */,
-				EC61DE6128D612EC00763700 /* TabBarController.swift */,
-				EC819987284B752F00BB7EC8 /* InfoViewController.swift */,
 				ECDE86BB2848935C004A0B1E /* Assets.xcassets */,
 				ECDE86BD2848935C004A0B1E /* LaunchScreen.storyboard */,
 				ECDE86C02848935C004A0B1E /* Info.plist */,

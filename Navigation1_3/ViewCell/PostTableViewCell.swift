@@ -20,7 +20,7 @@ class PostTableViewCell: UITableViewCell {
     lazy var authorLabel: UILabel = {
         let author = UILabel()
         author.font = .systemFont(ofSize: 20, weight: .bold)
-        author.textColor = .black
+        //author.textColor = .black
         author.numberOfLines = 2
         author.translatesAutoresizingMaskIntoConstraints = false
         return author
@@ -110,7 +110,7 @@ class PostTableViewCell: UITableViewCell {
     private func likesViewsDescrption() -> UILabel {
         let likesViews = UILabel()
         likesViews.font = .systemFont(ofSize: 16)
-        likesViews.textColor = .black
+        //likesViews.textColor = .black
         return likesViews
     }
 

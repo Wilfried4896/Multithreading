@@ -20,7 +20,7 @@ class PhotosTableViewCell: UITableViewCell {
         let tilte = UILabel()
         tilte.text = "Photos"
         tilte.font = .systemFont(ofSize: 24, weight: .bold)
-        tilte.textColor = .black
+//        tilte.textColor = .black
         tilte.translatesAutoresizingMaskIntoConstraints = false
         return tilte
     }()
@@ -57,7 +57,7 @@ class PhotosTableViewCell: UITableViewCell {
     }
 
     private func setUpView() {
-        self.backgroundColor = .white
+        //self.backgroundColor = .white
         [photoLabel, arrowButton, photoCollection].forEach({
             contentView.addSubview($0)
         })
@@ -81,7 +81,7 @@ class PhotosTableViewCell: UITableViewCell {
     }
 
     @objc func photoAlbum() {
-        //UINavigationController.pu
+        
     }
 }
 
