@@ -177,6 +177,7 @@
 			isa = PBXGroup;
 			children = (
 				ECDE86B12848935A004A0B1E /* Navigation1_3 */,
+				EC61DE6928D6141A00763700 /* StorageService */,
 				ECDE86B02848935A004A0B1E /* Products */,
 			);
 			sourceTree = "<group>";
@@ -193,7 +194,6 @@
 		ECDE86B12848935A004A0B1E /* Navigation1_3 */ = {
 			isa = PBXGroup;
 			children = (
-				EC61DE6928D6141A00763700 /* StorageService */,
 				EC13E9BB28E4EA1900059FB4 /* ViewCell */,
 				EC13E9BA28E4EA0100059FB4 /* VC */,
 				EC13E9B928E4E9D300059FB4 /* Application */,
