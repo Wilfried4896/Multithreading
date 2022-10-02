@@ -47,6 +47,13 @@ class PhotosViewController: UIViewController {
         navigationController?.navigationBar.isHidden = false
     }
 
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        imagePublisherFacade.removeSubscription(for: self)
+        imagePublisherFacade.rechargeImageLibrary()
+    }
+    
     private func setUpphotosCollection() {
         navigationItem.title = "Photos Gallery"
         view.addSubview(photosCollectionView)
