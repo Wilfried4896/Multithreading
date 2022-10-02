@@ -11,7 +11,25 @@ import StorageService
 class FeedViewController: UIViewController {
     
     var post = PostFeed(Title: "Мой пост")
-    let stackView = UIStackView()
+    
+    
+    private lazy var checkGuessButton: CustomButton = {
+        let button = CustomButton(title: "Проверить", bgColor: .black, tilteColor: .white)
+        button.layer.cornerRadius = 10
+        return button
+    }()
+    
+    private lazy var textFielFeed: CustomTextField = {
+        let textField = CustomTextField(placeholderTitle: "Enter the secret code")
+        textField.delegate = self
+        return textField
+    }()
+    
+    private lazy var statusFeedLabel: UILabel = {
+        let statusFeed = UILabel()
+        statusFeed.translatesAutoresizingMaskIntoConstraints = false
+        return statusFeed
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,37 +38,47 @@ class FeedViewController: UIViewController {
     }
 
     private func setUpStackView() {
-        view.addSubview(stackView)
-        stackView.axis = .vertical
-        stackView.spacing = 10
-        addButtonStackView(.systemCyan, nameBtton: "Первая кнопка", event: .touchUpInside, action: #selector(buttonActionPush))
-        addButtonStackView(.systemIndigo, nameBtton: "Вторая кнопка", event: .touchUpInside, action: #selector(buttonActionPush))
-        stackView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(textFielFeed)
+        view.addSubview(checkGuessButton)
+        view.addSubview(statusFeedLabel)
+        
+        checkGuessButtonVerification()
 
         NSLayoutConstraint.activate([
-            stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            stackView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+            textFielFeed.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 30),
+            textFielFeed.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
+            textFielFeed.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30),
+            textFielFeed.heightAnchor.constraint(equalToConstant: 50),
+            
+            
+            checkGuessButton.topAnchor.constraint(equalTo: textFielFeed.bottomAnchor, constant: 30),
+            checkGuessButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 70),
+            checkGuessButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -70),
+            checkGuessButton.heightAnchor.constraint(equalToConstant: 50),
+            
+            
+            //statusFeedLabel.topAnchor.constraint(equalTo: checkGuessButton.bottomAnchor, constant: 60),
+            statusFeedLabel.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
+            statusFeedLabel.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor),
         ])
     }
 
-    private func addButtonStackView(_ colorButton: UIColor, nameBtton: String, event: UIControl.Event, action: Selector) {
-        let button = UIButton()
-        button.setTitle("\(nameBtton)", for: .normal)
-        button.backgroundColor = colorButton
-        button.layer.cornerRadius = 10
-        button.addTarget(self, action: action, for: event)
-        stackView.addArrangedSubview(button)
 
-        NSLayoutConstraint.activate([
-            button.heightAnchor.constraint(equalToConstant: 40),
-            button.widthAnchor.constraint(equalToConstant: 180)
-        ])
+    private func checkGuessButtonVerification() {
+        checkGuessButton.actionButton = {
+            
+            guard let textFielFeed = self.textFielFeed.text else { return }
+            
+            let resultat = FeedModel.shared.correctedWord(textFielFeed)
+          
+            self.statusFeedLabel.text = resultat.text
+            self.statusFeedLabel.textColor = resultat.textColor
+        }
     }
+}
 
-    @objc func buttonActionPush() {
-        let postViewController = PostViewController()
-        postViewController.titlePost = post.title
-        navigationController?.pushViewController(postViewController, animated: true)
+extension FeedViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
     }
-
 }

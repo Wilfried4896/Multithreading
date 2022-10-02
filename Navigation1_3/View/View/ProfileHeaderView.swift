@@ -32,12 +32,9 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
         return name
     }()
 
-    private lazy var setStatusButton: UIButton = {
-        let show = UIButton()
-        show.setTitle("Set status", for: .normal)
-        show.backgroundColor = .systemBlue
-        show.translatesAutoresizingMaskIntoConstraints = false
-        show.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
+    private lazy var setStatusButton: CustomButton = {
+        let show = CustomButton(title: "Set status", bgColor: .systemBlue, tilteColor: .white)
+        
         show.layer.cornerRadius = 10
         show.layer.shadowRadius = 4
         show.layer.borderColor = UIColor.black.cgColor
@@ -80,23 +77,13 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
-    @objc func statusTextChanged(_textField: UITextField) {
-        statusText = _textField.text
-    }
     
-    @objc func buttonPressed() {
-        guard let statusText = statusText else {
-            statusLabel.text = "Нет статуса"
-            return
-        }
-        statusLabel.text = statusText
-    }
-
     private func setUpView() {
         [avatarImageView, fullNameLabel, setStatusButton, statusLabel, statusTextField].forEach({
            addSubview($0)
         })
+        
+        actionButtonsetStatus()
         
         NSLayoutConstraint.activate([
             // avatarImageViewConstraint
@@ -133,6 +120,20 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
         avatarImageView.image = profile.avatar
         fullNameLabel.text = profile.fullName
         statusLabel.text = profile.status
+    }
+    
+    @objc func statusTextChanged(_textField: UITextField) {
+        statusText = _textField.text
+    }
+    
+    private func actionButtonsetStatus() {
+        setStatusButton.actionButton = {
+            guard let statusText = self.statusText else {
+                self.statusLabel.text = "Нет статуса"
+                return
+            }
+            self.statusLabel.text = statusText
+        }
     }
 }
 

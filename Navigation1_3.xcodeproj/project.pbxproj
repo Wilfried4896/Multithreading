@@ -8,7 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		EC04F88C285871CC000D11AD /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC04F88B285871CC000D11AD /* PostTableViewCell.swift */; };
+		EC13E9C328E8DD3E00059FB4 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC13E9C228E8DD3E00059FB4 /* CustomButton.swift */; };
 		EC3E5BCB28E1D65D009B3ABE /* iOSIntPackage in Frameworks */ = {isa = PBXBuildFile; productRef = EC3E5BCA28E1D65D009B3ABE /* iOSIntPackage */; };
+		EC49F72428EA077500AE1946 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC49F72328EA077500AE1946 /* CustomTextField.swift */; };
+		EC49F72628EA09D700AE1946 /* FeedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC49F72528EA09D700AE1946 /* FeedModel.swift */; };
 		EC5E95AE2854C9980066D549 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC5E95AD2854C9980066D549 /* LogInViewController.swift */; };
 		EC61A0AD28605895002041E3 /* MyCostumCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC61A0AC28605895002041E3 /* MyCostumCollectionCell.swift */; };
 		EC61DE6228D612EC00763700 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC61DE6128D612EC00763700 /* TabBarController.swift */; };
@@ -57,6 +60,9 @@
 /* Begin PBXFileReference section */
 		EC04F88B285871CC000D11AD /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
 		EC04F88D2858BA9B000D11AD /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
+		EC13E9C228E8DD3E00059FB4 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
+		EC49F72328EA077500AE1946 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
+		EC49F72528EA09D700AE1946 /* FeedModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedModel.swift; sourceTree = "<group>"; };
 		EC5E95AD2854C9980066D549 /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		EC61A0AC28605895002041E3 /* MyCostumCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCostumCollectionCell.swift; sourceTree = "<group>"; };
 		EC61DE6128D612EC00763700 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
@@ -118,16 +124,42 @@
 			path = VC;
 			sourceTree = "<group>";
 		};
-		EC13E9BB28E4EA1900059FB4 /* ViewCell */ = {
+		EC13E9BB28E4EA1900059FB4 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				EC13E9C128E8DD2400059FB4 /* View */,
+				EC13E9C028E8DD0100059FB4 /* CollectionCell */,
+				EC13E9BF28E8DCCC00059FB4 /* TableCell */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		EC13E9BF28E8DCCC00059FB4 /* TableCell */ = {
 			isa = PBXGroup;
 			children = (
 				EC8DEF5F285CA53D00B25A65 /* PhotosTableViewCell.swift */,
-				EC61A0AC28605895002041E3 /* MyCostumCollectionCell.swift */,
-				EC8DEF63285CC0AF00B25A65 /* PhotosCollectionViewCell.swift */,
-				EC819991284DC59300BB7EC8 /* ProfileHeaderView.swift */,
 				EC04F88B285871CC000D11AD /* PostTableViewCell.swift */,
 			);
-			path = ViewCell;
+			path = TableCell;
+			sourceTree = "<group>";
+		};
+		EC13E9C028E8DD0100059FB4 /* CollectionCell */ = {
+			isa = PBXGroup;
+			children = (
+				EC8DEF63285CC0AF00B25A65 /* PhotosCollectionViewCell.swift */,
+				EC61A0AC28605895002041E3 /* MyCostumCollectionCell.swift */,
+			);
+			path = CollectionCell;
+			sourceTree = "<group>";
+		};
+		EC13E9C128E8DD2400059FB4 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				EC819991284DC59300BB7EC8 /* ProfileHeaderView.swift */,
+				EC13E9C228E8DD3E00059FB4 /* CustomButton.swift */,
+				EC49F72328EA077500AE1946 /* CustomTextField.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		EC317D6D2855BD5B00581DC5 /* Post */ = {
@@ -165,12 +197,13 @@
 			path = Profile;
 			sourceTree = "<group>";
 		};
-		ECA2B87E28D9D1CC003677D1 /* UserData */ = {
+		ECA2B87E28D9D1CC003677D1 /* Model */ = {
 			isa = PBXGroup;
 			children = (
 				ECA2B87F28D9D1F2003677D1 /* User.swift */,
+				EC49F72528EA09D700AE1946 /* FeedModel.swift */,
 			);
-			path = UserData;
+			path = Model;
 			sourceTree = "<group>";
 		};
 		ECDE86A62848935A004A0B1E = {
@@ -194,10 +227,10 @@
 		ECDE86B12848935A004A0B1E /* Navigation1_3 */ = {
 			isa = PBXGroup;
 			children = (
-				EC13E9BB28E4EA1900059FB4 /* ViewCell */,
+				EC13E9BB28E4EA1900059FB4 /* View */,
 				EC13E9BA28E4EA0100059FB4 /* VC */,
 				EC13E9B928E4E9D300059FB4 /* Application */,
-				ECA2B87E28D9D1CC003677D1 /* UserData */,
+				ECA2B87E28D9D1CC003677D1 /* Model */,
 				ECDE86BB2848935C004A0B1E /* Assets.xcassets */,
 				ECDE86BD2848935C004A0B1E /* LaunchScreen.storyboard */,
 				ECDE86C02848935C004A0B1E /* Info.plist */,
@@ -333,8 +366,10 @@
 			files = (
 				ECDE86CB2848F6D3004A0B1E /* PostViewController.swift in Sources */,
 				EC61A0AD28605895002041E3 /* MyCostumCollectionCell.swift in Sources */,
+				EC49F72628EA09D700AE1946 /* FeedModel.swift in Sources */,
 				EC61DE6228D612EC00763700 /* TabBarController.swift in Sources */,
 				ECDE86B32848935A004A0B1E /* AppDelegate.swift in Sources */,
+				EC49F72428EA077500AE1946 /* CustomTextField.swift in Sources */,
 				EC8DEF60285CA53D00B25A65 /* PhotosTableViewCell.swift in Sources */,
 				EC8DEF64285CC0AF00B25A65 /* PhotosCollectionViewCell.swift in Sources */,
 				ECA2B88028D9D1F2003677D1 /* User.swift in Sources */,
@@ -345,6 +380,7 @@
 				EC819988284B752F00BB7EC8 /* InfoViewController.swift in Sources */,
 				EC8DEF62285CC02C00B25A65 /* PhotosViewController.swift in Sources */,
 				ECDE86C928489E2F004A0B1E /* ProfileViewController.swift in Sources */,
+				EC13E9C328E8DD3E00059FB4 /* CustomButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

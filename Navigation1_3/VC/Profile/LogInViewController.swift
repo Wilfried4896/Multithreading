@@ -40,15 +40,10 @@ class LogInViewController: UIViewController {
         return password
     }()
 
-    private lazy var logInButton: UIButton = {
-        let logIn = UIButton(type: .system)
-        logIn.backgroundColor = UIColor(patternImage: UIImage(named: "blue_pixel")!)
-        logIn.setTitleColor(UIColor.white, for: .normal)
-        logIn.titleLabel?.font = UIFont.systemFont(ofSize: 20)
-        logIn.setTitle("Log In", for: .normal)
+    private lazy var logInButton: CustomButton = {
+        let logIn = CustomButton(title: "Log In",bgColor: UIColor(patternImage: UIImage(named: "blue_pixel")!) ,tilteColor: .white)
+        
         logIn.layer.cornerRadius = 10
-        logIn.translatesAutoresizingMaskIntoConstraints = false
-        logIn.addTarget(self, action: #selector(openProfile), for: .touchUpInside)
         return logIn
     }()
 
@@ -74,6 +69,7 @@ class LogInViewController: UIViewController {
             self.scrollViewLogin.addSubview($0)
         })
 
+        actionButton()
         self.navigationController?.navigationBar.isHidden = true
 
         NSLayoutConstraint.activate([
@@ -148,39 +144,32 @@ class LogInViewController: UIViewController {
         self.scrollViewLogin.contentOffset = CGPoint(x: 0, y: 0)
     }
 
-    @objc func openProfile() {
+    private func actionButton() {
         
-        //        #if DEBUG
-        //            guard let loginIn = emailLogin.text else { return }
-        //        #else
-        //            guard let loginIn = emailLogin.text else { return }
-        //        #endif
-        //
-        //        let testService = TestUserService(userTest: profileVC.userCurrent).loginIn(login: loginIn)
-        //            guard let currentLog = testService else { return }
-        //            profileVC.userCurrent = currentLog
-        
-        guard let emailLogin = emailLogin.text, let passwordLogin = passwordLogin.text else { return }
-
-        let profileVC = TabBarController()
-
-        let messageError = UIAlertController(title: "Внимание", message: "Логин или пароль некорректен", preferredStyle: .actionSheet)
-        let actionMessage = UIAlertAction(title: "OK", style: .destructive)
-
-        let loginInspector = loginDelegate?.makeLoginInspector()
-        
-        let verifiedCurrent = loginInspector?.check(loginUser: emailLogin, passwordUser: passwordLogin)
-        
-        guard let verifiedCurrent else { return }
+        logInButton.actionButton = {
             
-        guard verifiedCurrent else {
-            messageError.addAction(actionMessage)
-            present(messageError, animated: true)
+            guard let emailLogin = self.emailLogin.text, let passwordLogin = self.passwordLogin.text else { return }
 
-            return
+            let profileVC = TabBarController()
+
+            let messageError = UIAlertController(title: "Внимание", message: "Логин или пароль некорректен", preferredStyle: .actionSheet)
+            let actionMessage = UIAlertAction(title: "OK", style: .destructive)
+
+            let loginInspector = self.loginDelegate?.makeLoginInspector()
+            
+            let verifiedCurrent = loginInspector?.check(loginUser: emailLogin, passwordUser: passwordLogin)
+            
+            guard let verifiedCurrent else { return }
+                
+            guard verifiedCurrent else {
+                messageError.addAction(actionMessage)
+                self.present(messageError, animated: true)
+
+                return
+            }
+            
+            UIApplication.shared.delegate?.window??.rootViewController = profileVC
         }
-        
-        UIApplication.shared.delegate?.window??.rootViewController = profileVC
     }
 }
 

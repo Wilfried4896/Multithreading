@@ -16,29 +16,30 @@ class InfoViewController: UIViewController {
         self.view.addSubview(buttonConfirmation)
     }
 
-    lazy var buttonConfirmation: UIButton = {
-        let buttonConfirmation = UIButton()
+    lazy var buttonConfirmation: CustomButton = {
+        
+        let buttonConfirmation = CustomButton(title: "Выйти", bgColor: .black, tilteColor: .white)
+       
         buttonConfirmation.frame = CGRect(x: 100, y: 300, width: 200, height: 50)
         buttonConfirmation.center = self.view.center
-        buttonConfirmation.setTitle("Выйти", for: .normal)
-        buttonConfirmation.addTarget(self, action: #selector(alertMessage), for: .touchUpInside)
+        buttonConfirmation.layer.cornerRadius = 10
+        buttonConfirmation.actionButton = {
+            
+            let alertController = UIAlertController(title: "Выйти из этой страницы", message: "Хотите выйти ?", preferredStyle: .alert)
 
+            let cancelButton = UIAlertAction(title: "Да", style: .cancel) { _ in
+                self.dismiss(animated: true)
+                print("Вышел")
+            }
+            alertController.addAction(cancelButton)
+
+            let okButton = UIAlertAction(title: "Нет", style: .destructive) { _ in
+                print("Еще не зокнчил")
+            }
+            alertController.addAction(okButton)
+            self.present(alertController, animated: true)
+        }
+        
         return buttonConfirmation
     }()
-
-    @objc func alertMessage() {
-        let alertController = UIAlertController(title: "Выйти из этой страницы", message: "Хотите выйти ?", preferredStyle: .alert)
-
-        let cancelButton = UIAlertAction(title: "Да", style: .cancel) { _ in
-            self.dismiss(animated: true)
-            print("Вышел")
-        }
-        alertController.addAction(cancelButton)
-
-        let okButton = UIAlertAction(title: "Нет", style: .destructive) { _ in
-            print("Еще не зокнчил")
-        }
-        alertController.addAction(okButton)
-        present(alertController, animated: true)
-    }
 }

@@ -88,8 +88,8 @@ class Checker: LoginViewControllerDelegate {
     
     private init() {}
     
-    private var login: String = "login"
-    private var password: String = "password"
+    private var login: String = ""
+    private var password: String = ""
     
     func check(loginUser: String, passwordUser: String) -> Bool {
         
