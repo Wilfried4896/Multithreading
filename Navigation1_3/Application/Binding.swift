@@ -22,7 +22,6 @@ class Binding<T> {
     }
     
     func startBind(_ listener: Listener?) {
-        listener(value)
         self.listener = listener
     }
 }
