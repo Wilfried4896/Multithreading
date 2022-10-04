@@ -18,7 +18,7 @@ class FeedViewController: UIViewController {
         button.layer.cornerRadius = 10
         return button
     }()
-    
+
     private lazy var textFielFeed: CustomTextField = {
         let textField = CustomTextField(placeholderTitle: "Enter the secret code")
         textField.delegate = self
@@ -34,6 +34,7 @@ class FeedViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = "Лента"
+        view.backgroundColor = .white
         setUpStackView()
     }
 
@@ -56,23 +57,23 @@ class FeedViewController: UIViewController {
             checkGuessButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -70),
             checkGuessButton.heightAnchor.constraint(equalToConstant: 50),
             
-            
-            //statusFeedLabel.topAnchor.constraint(equalTo: checkGuessButton.bottomAnchor, constant: 60),
             statusFeedLabel.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
             statusFeedLabel.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor),
         ])
     }
 
+    private func statusLabel(_ text: String, _ color: UIColor) {
+            self.statusFeedLabel.text = text
+            self.statusFeedLabel.textColor = color
+    }
 
     private func checkGuessButtonVerification() {
         checkGuessButton.actionButton = {
-            
+            let feedModel = FeedModel()
             guard let textFielFeed = self.textFielFeed.text else { return }
             
-            let resultat = FeedModel.shared.correctedWord(textFielFeed)
-          
-            self.statusFeedLabel.text = resultat.text
-            self.statusFeedLabel.textColor = resultat.textColor
+            feedModel.check(textFielFeed) ? self.statusLabel("Правильно", .green) : self.statusLabel("Неправильно", .red )
+            
         }
     }
 }

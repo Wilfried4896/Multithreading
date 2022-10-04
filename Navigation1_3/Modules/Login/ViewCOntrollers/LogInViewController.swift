@@ -10,6 +10,7 @@ import UIKit
 class LogInViewController: UIViewController {
 
     var loginDelegate: LoginFactory?
+    var viewModel: LoginNavigation?
     
     private lazy var scrollViewLogin: UIScrollView = {
         let scrollLogin = UIScrollView()
@@ -150,7 +151,7 @@ class LogInViewController: UIViewController {
             
             guard let emailLogin = self.emailLogin.text, let passwordLogin = self.passwordLogin.text else { return }
 
-            let profileVC = TabBarController()
+           // let profileVC = TabBarController()
 
             let messageError = UIAlertController(title: "Внимание", message: "Логин или пароль некорректен", preferredStyle: .actionSheet)
             let actionMessage = UIAlertAction(title: "OK", style: .destructive)
@@ -167,8 +168,7 @@ class LogInViewController: UIViewController {
 
                 return
             }
-            
-            UIApplication.shared.delegate?.window??.rootViewController = profileVC
+            self.viewModel?.goToHome()
         }
     }
 }

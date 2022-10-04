@@ -11,21 +11,21 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    
+    var coordinator: AppCoordinator?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-
         
-        let loginFactory = MyLoginFactory(loginInspector: LoginInspector())
+        window = UIWindow(frame: UIScreen.main.bounds)
         
-        let logInViewController = LogInViewController()
-        logInViewController.loginDelegate = loginFactory
+        let navigationContoller = UINavigationController()
         
-        let window = UIWindow(frame: UIScreen.main.bounds)
-        window.rootViewController = logInViewController
-        window.makeKeyAndVisible()
+        window?.rootViewController = navigationContoller
+        window?.makeKeyAndVisible()
         
-        self.window = window
-        self.window?.backgroundColor = .white
+        coordinator = AppCoordinator(navController: navigationContoller)
+        
+        coordinator?.start()
 
         return true
     }
