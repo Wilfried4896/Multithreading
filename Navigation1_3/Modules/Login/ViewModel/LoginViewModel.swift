@@ -14,7 +14,6 @@ protocol LoginNavigation {
 class LoginViewModel: LoginNavigation {
     
     var loginDelegate: LoginFactory?
-    var loginPassword = Binding(value: "")
     var navigation: LoginNavigation?
     
     func goToHome() {

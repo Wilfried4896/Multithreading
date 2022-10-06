@@ -13,15 +13,16 @@ class Binding<T> {
     private var listener: Listener?
     var value: T {
         didSet{
-            
+            listener?(value)
         }
     }
     
-    required init(value: T) {
+    required init(_ value: T) {
         self.value = value
     }
     
     func startBind(_ listener: Listener?) {
         self.listener = listener
+        listener?(value)
     }
 }

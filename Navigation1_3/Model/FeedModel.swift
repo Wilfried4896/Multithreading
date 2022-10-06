@@ -7,7 +7,10 @@
 
 import Foundation
 
-class FeedModel {
+protocol Chech {
+    func check(_ word: String) -> Bool
+}
+class FeedModel: Chech {
     
     var secretWord = "secretWord"
     

@@ -12,6 +12,7 @@ class FeedViewController: UIViewController {
     
     var post = PostFeed(Title: "Мой пост")
     
+    var feedViewModel = FeedViewModel()
     
     private lazy var checkGuessButton: CustomButton = {
         let button = CustomButton(title: "Проверить", bgColor: .black, tilteColor: .white)
@@ -42,7 +43,7 @@ class FeedViewController: UIViewController {
         view.addSubview(textFielFeed)
         view.addSubview(checkGuessButton)
         view.addSubview(statusFeedLabel)
-        
+        binding()
         checkGuessButtonVerification()
 
         NSLayoutConstraint.activate([
@@ -61,19 +62,27 @@ class FeedViewController: UIViewController {
             statusFeedLabel.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor),
         ])
     }
-
-    private func statusLabel(_ text: String, _ color: UIColor) {
-            self.statusFeedLabel.text = text
-            self.statusFeedLabel.textColor = color
+    
+    func binding() {
+        feedViewModel.text.startBind { text in
+            DispatchQueue.main.async {
+                self.statusFeedLabel.text = text
+            }
+        }
+        
+        feedViewModel.color.startBind { color in
+            DispatchQueue.main.async {
+                self.statusFeedLabel.textColor = color
+            }
+        }
     }
 
     private func checkGuessButtonVerification() {
         checkGuessButton.actionButton = {
-            let feedModel = FeedModel()
+            
             guard let textFielFeed = self.textFielFeed.text else { return }
-            
-            feedModel.check(textFielFeed) ? self.statusLabel("Правильно", .green) : self.statusLabel("Неправильно", .red )
-            
+
+            self.feedViewModel.didTapButton(textFielFeed)
         }
     }
 }
