@@ -7,6 +7,8 @@
 
 import UIKit
 import StorageService
+import iOSIntPackage
+ 
 
 class PhotosCollectionViewCell: UICollectionViewCell {
 
@@ -37,10 +39,6 @@ class PhotosCollectionViewCell: UICollectionViewCell {
             galeryAlbum.trailingAnchor.constraint(equalTo: trailingAnchor),
             galeryAlbum.bottomAnchor.constraint(equalTo: bottomAnchor),
         ])
-    }
-
-    func setUpGalery(with album: PhotoGame) {
-        galeryAlbum.image = UIImage(named: "\(album.image ?? "placeholder")")
     }
     
     func setUpPhoto(photo: UIImage) {

@@ -14,8 +14,10 @@ class PhotosViewController: UIViewController {
     private let photoGalery: [PhotoGame] = Photo.shared.imageData
     private var galery = [UIImage]()
     
-    private let imageGalery = Photo.iamgesGalery()
-    let imagePublisherFacade = ImagePublisherFacade()
+    private var imageGalery = Photo.iamgesGalery()
+//    let imagePublisherFacade = ImagePublisherFacade()
+    
+    var timeThread = Date()
     
     private enum ConstantInterval {
         static let instant: CGFloat = 3
@@ -50,16 +52,83 @@ class PhotosViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-        imagePublisherFacade.removeSubscription(for: self)
-        imagePublisherFacade.rechargeImageLibrary()
+//        imagePublisherFacade.removeSubscription(for: self)
+//        imagePublisherFacade.rechargeImageLibrary()
     }
     
     private func setUpphotosCollection() {
         navigationItem.title = "Photos Gallery"
         view.addSubview(photosCollectionView)
+        view.backgroundColor = .white
         
-        imagePublisherFacade.subscribe(self)
-        imagePublisherFacade.addImagesWithTimer(time: 0.5, repeat: imageGalery.count, userImages: imageGalery)
+//        imagePublisherFacade.subscribe(self)
+//        imagePublisherFacade.addImagesWithTimer(time: 0.5, repeat: imageGalery.count, userImages: imageGalery)
+        
+//        ImageProcessor().processImagesOnThread(
+//            sourceImages: imageGalery,
+//            filter: .motionBlur(radius: 2.0),
+//            qos: .userInitiated) { cgImage in
+//                for image in cgImage {
+//                    DispatchQueue.main.async {
+//                        self.galery.append(UIImage(cgImage: image!))
+//                        self.photosCollectionView.reloadData()
+//                    }
+//                }
+//                print("qos: userInitiated: \(Date().timeIntervalSince(self.timeThread)) secondes")
+//            }
+//
+        ImageProcessor().processImagesOnThread(
+            sourceImages: imageGalery,
+            filter: .motionBlur(radius: 2.0),
+            qos: .background) { cgImage in
+                for image in cgImage {
+                    DispatchQueue.main.async {
+                        self.galery.append(UIImage(cgImage: image!))
+                        self.photosCollectionView.reloadData()
+                    }
+                }
+                print("qos: background: \(Date().timeIntervalSince(self.timeThread)) secondes")
+            }
+        
+//        ImageProcessor().processImagesOnThread(
+//            sourceImages: imageGalery,
+//            filter: .motionBlur(radius: 2.0),
+//            qos: .default) { cgImage in
+//                for image in cgImage {
+//                    DispatchQueue.main.async {
+//                        self.galery.append(UIImage(cgImage: image!))
+//                        self.photosCollectionView.reloadData()
+//                    }
+//                }
+//                print("qos: default: \(Date().timeIntervalSince(self.timeThread)) secondes")
+//            }
+        
+//        ImageProcessor().processImagesOnThread(
+//            sourceImages: imageGalery,
+//            filter: .motionBlur(radius: 2.0),
+//            qos: .utility) { cgImage in
+//                for image in cgImage {
+//                    DispatchQueue.main.async {
+//                        self.galery.append(UIImage(cgImage: image!))
+//                        self.photosCollectionView.reloadData()
+//                    }
+//                }
+//                print("qos: utility: \(Date().timeIntervalSince(self.timeThread)) secondes")
+//            }
+//
+//        ImageProcessor().processImagesOnThread(
+//            sourceImages: imageGalery,
+//            filter: .motionBlur(radius: 2.0),
+//            qos: .userInteractive) { cgImage in
+//                for image in cgImage {
+//                    DispatchQueue.main.async {
+//                        self.galery.append(UIImage(cgImage: image!))
+//                        self.photosCollectionView.reloadData()
+//                    }
+//                }
+//                print("qos: userInteractive: \(Date().timeIntervalSince(self.timeThread)) secondes")
+//            }
+        
 
         NSLayoutConstraint.activate([
             photosCollectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
@@ -98,10 +167,10 @@ extension PhotosViewController: UICollectionViewDelegateFlowLayout, UICollection
 }
 
 
-extension PhotosViewController: ImageLibrarySubscriber {
-    
-    func receive(images: [UIImage]) {
-        galery = images
-        photosCollectionView.reloadData()
-    }
-}
+//extension PhotosViewController: ImageLibrarySubscriber {
+//
+//    func receive(images: [UIImage]) {
+//        galery = images
+//        photosCollectionView.reloadData()
+//    }
+//}

@@ -80,7 +80,7 @@ public struct Photo {
         ]
         
         for name in data {
-            galery.append(UIImage(named: name)! )
+            galery.append(UIImage(named: name)!)
         }
         
         return galery
