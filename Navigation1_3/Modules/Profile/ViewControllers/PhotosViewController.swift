@@ -64,31 +64,31 @@ class PhotosViewController: UIViewController {
 //        imagePublisherFacade.subscribe(self)
 //        imagePublisherFacade.addImagesWithTimer(time: 0.5, repeat: imageGalery.count, userImages: imageGalery)
         
-//        ImageProcessor().processImagesOnThread(
-//            sourceImages: imageGalery,
-//            filter: .motionBlur(radius: 2.0),
-//            qos: .userInitiated) { cgImage in
-//                for image in cgImage {
-//                    DispatchQueue.main.async {
-//                        self.galery.append(UIImage(cgImage: image!))
-//                        self.photosCollectionView.reloadData()
-//                    }
-//                }
-//                print("qos: userInitiated: \(Date().timeIntervalSince(self.timeThread)) secondes")
-//            }
-//
         ImageProcessor().processImagesOnThread(
             sourceImages: imageGalery,
-            filter: .motionBlur(radius: 2.0),
-            qos: .background) { cgImage in
+            filter: .noir,
+            qos: .userInitiated) { cgImage in
                 for image in cgImage {
                     DispatchQueue.main.async {
                         self.galery.append(UIImage(cgImage: image!))
                         self.photosCollectionView.reloadData()
                     }
                 }
-                print("qos: background: \(Date().timeIntervalSince(self.timeThread)) secondes")
+                print("qos: userInitiated: \(Date().timeIntervalSince(self.timeThread)) secondes")
             }
+//
+//        ImageProcessor().processImagesOnThread(
+//            sourceImages: imageGalery,
+//            filter: .motionBlur(radius: 2.0),
+//            qos: .background) { cgImage in
+//                for image in cgImage {
+//                    DispatchQueue.main.async {
+//                        self.galery.append(UIImage(cgImage: image!))
+//                        self.photosCollectionView.reloadData()
+//                    }
+//                }
+//                print("qos: background: \(Date().timeIntervalSince(self.timeThread)) secondes")
+//            }
         
 //        ImageProcessor().processImagesOnThread(
 //            sourceImages: imageGalery,

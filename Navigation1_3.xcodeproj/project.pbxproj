@@ -33,6 +33,7 @@
 		EC8DEF60285CA53D00B25A65 /* PhotosTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8DEF5F285CA53D00B25A65 /* PhotosTableViewCell.swift */; };
 		EC8DEF62285CC02C00B25A65 /* PhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8DEF61285CC02C00B25A65 /* PhotosViewController.swift */; };
 		EC8DEF64285CC0AF00B25A65 /* PhotosCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8DEF63285CC0AF00B25A65 /* PhotosCollectionViewCell.swift */; };
+		EC943E6928F6CFFB00D16B1C /* BruteForce.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC943E6828F6CFFB00D16B1C /* BruteForce.swift */; };
 		ECA2B88028D9D1F2003677D1 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA2B87F28D9D1F2003677D1 /* User.swift */; };
 		ECDE86B32848935A004A0B1E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDE86B22848935A004A0B1E /* AppDelegate.swift */; };
 		ECDE86BC2848935C004A0B1E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ECDE86BB2848935C004A0B1E /* Assets.xcassets */; };
@@ -91,6 +92,7 @@
 		EC8DEF5F285CA53D00B25A65 /* PhotosTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosTableViewCell.swift; sourceTree = "<group>"; };
 		EC8DEF61285CC02C00B25A65 /* PhotosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosViewController.swift; sourceTree = "<group>"; };
 		EC8DEF63285CC0AF00B25A65 /* PhotosCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosCollectionViewCell.swift; sourceTree = "<group>"; };
+		EC943E6828F6CFFB00D16B1C /* BruteForce.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BruteForce.swift; sourceTree = "<group>"; };
 		ECA2B87F28D9D1F2003677D1 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		ECDE86AF2848935A004A0B1E /* Navigation1_3.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Navigation1_3.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ECDE86B22848935A004A0B1E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -179,6 +181,7 @@
 				EC819991284DC59300BB7EC8 /* ProfileHeaderView.swift */,
 				EC13E9C228E8DD3E00059FB4 /* CustomButton.swift */,
 				EC49F72328EA077500AE1946 /* CustomTextField.swift */,
+				EC943E6828F6CFFB00D16B1C /* BruteForce.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -475,6 +478,7 @@
 				EC5E95AE2854C9980066D549 /* LogInViewController.swift in Sources */,
 				EC819992284DC59300BB7EC8 /* ProfileHeaderView.swift in Sources */,
 				EC04F88C285871CC000D11AD /* PostTableViewCell.swift in Sources */,
+				EC943E6928F6CFFB00D16B1C /* BruteForce.swift in Sources */,
 				EC819988284B752F00BB7EC8 /* InfoViewController.swift in Sources */,
 				EC49F75528EB74E500AE1946 /* AppCoordinator.swift in Sources */,
 				EC49F77128EC541C00AE1946 /* LoginViewModel.swift in Sources */,

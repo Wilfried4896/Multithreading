@@ -43,9 +43,24 @@ class LogInViewController: UIViewController {
 
     private lazy var logInButton: CustomButton = {
         let logIn = CustomButton(title: "Log In",bgColor: UIColor(patternImage: UIImage(named: "blue_pixel")!) ,tilteColor: .white)
-        
         logIn.layer.cornerRadius = 10
+        
         return logIn
+    }()
+    
+    private lazy var buttonGetPassword: CustomButton = {
+        let getPassword = CustomButton(title: "Подобрать пароль", bgColor: .systemBlue, tilteColor: .white)
+        getPassword.layer.cornerRadius = 10
+        
+        return getPassword
+    }()
+    
+    private lazy var activityIndicator: UIActivityIndicatorView = {
+        let activityIndicator = UIActivityIndicatorView(style: .large)
+        activityIndicator.color = UIColor(patternImage: UIImage(named: "blue_pixel")!)
+        
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        return activityIndicator
     }()
 
     override func viewDidLoad() {
@@ -66,7 +81,7 @@ class LogInViewController: UIViewController {
         self.view.backgroundColor = .white
         self.view.addSubview(scrollViewLogin)
 
-        [logoVk, emailLogin, passwordLogin, logInButton].forEach({
+        [logoVk, emailLogin, passwordLogin, logInButton, buttonGetPassword, activityIndicator].forEach({
             self.scrollViewLogin.addSubview($0)
         })
 
@@ -97,15 +112,26 @@ class LogInViewController: UIViewController {
             passwordLogin.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
             passwordLogin.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
             passwordLogin.heightAnchor.constraint(equalToConstant: 50),
+            
+            // activityIndicator
+            activityIndicator.topAnchor.constraint(equalTo: emailLogin.bottomAnchor, constant: 10),
+            activityIndicator.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -30),
 
             // logInButtonConstraints
             logInButton.heightAnchor.constraint(equalToConstant: 50),
             logInButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
             logInButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
             logInButton.topAnchor.constraint(equalTo: passwordLogin.bottomAnchor, constant: 16),
+            
+            // buttonGetPassword
+            buttonGetPassword.heightAnchor.constraint(equalToConstant: 50),
+            buttonGetPassword.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+            buttonGetPassword.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
+            buttonGetPassword.topAnchor.constraint(equalTo: logInButton.bottomAnchor, constant: 16),
+            
         ])
     }
-
+    
     func parametrTextField() -> UITextField {
         let textField = UITextField()
         textField.layer.cornerRadius = 10
@@ -150,9 +176,7 @@ class LogInViewController: UIViewController {
         logInButton.actionButton = {
             
             guard let emailLogin = self.emailLogin.text, let passwordLogin = self.passwordLogin.text else { return }
-
-           // let profileVC = TabBarController()
-
+            
             let messageError = UIAlertController(title: "Внимание", message: "Логин или пароль некорректен", preferredStyle: .actionSheet)
             let actionMessage = UIAlertAction(title: "OK", style: .destructive)
 
@@ -169,6 +193,29 @@ class LogInViewController: UIViewController {
                 return
             }
             self.viewModel?.goToHome()
+        }
+        
+        buttonGetPassword.actionButton = {
+            
+            self.passwordLogin.text = "0aA!"
+            self.passwordLogin.isSecureTextEntry = false
+            
+            let quere = DispatchQueue(label: "ru.Wifried4896", attributes: .concurrent)
+            
+            let workItem = DispatchWorkItem() {
+                bruteForce(passwordToUnlock: "0aA!")
+            }
+            
+            let notifyItem = DispatchWorkItem() {
+                self.activityIndicator.stopAnimating()
+                self.passwordLogin.isSecureTextEntry = true
+            }
+            
+            workItem.notify(queue: .main, execute: notifyItem)
+            
+            self.activityIndicator.startAnimating()
+            quere.async(execute: workItem)
+            
         }
     }
 }

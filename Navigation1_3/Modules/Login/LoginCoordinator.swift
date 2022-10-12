@@ -39,8 +39,8 @@ extension LoginCoordinator: LoginNavigation {
     
     func goToHome() {
         // Get the app coordinator
-        let appC = parentCoordinator as! AppCoordinator
-        appC.goToHome()
+        let appC = parentCoordinator as? AppCoordinator
+        appC?.goToHome()
         parentCoordinator?.childDidFinish(self)
     }
 }
