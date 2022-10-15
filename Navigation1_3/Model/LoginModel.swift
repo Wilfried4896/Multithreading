@@ -42,7 +42,6 @@ class Checker: LoginViewControllerDelegate {
     var password: String = ""
     
     func check(loginUser: String, passwordUser: String) -> Bool {
-        
         return loginUser == login && passwordUser == password
     }
 }

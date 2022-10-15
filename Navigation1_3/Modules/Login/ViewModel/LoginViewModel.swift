@@ -17,10 +17,6 @@ class LoginViewModel: LoginNavigation {
     var navigation: LoginNavigation?
     
     func goToHome() {
-        
-        let verification = self.loginDelegate?.makeLoginInspector().check(loginUser: Checker.shared.login, passwordUser: Checker.shared.password)
-        
-        
         navigation?.goToHome()
     }
 }

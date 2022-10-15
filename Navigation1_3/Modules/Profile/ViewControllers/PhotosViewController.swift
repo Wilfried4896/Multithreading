@@ -64,18 +64,18 @@ class PhotosViewController: UIViewController {
 //        imagePublisherFacade.subscribe(self)
 //        imagePublisherFacade.addImagesWithTimer(time: 0.5, repeat: imageGalery.count, userImages: imageGalery)
         
-        ImageProcessor().processImagesOnThread(
-            sourceImages: imageGalery,
-            filter: .noir,
-            qos: .userInitiated) { cgImage in
-                for image in cgImage {
+            ImageProcessor().processImagesOnThread(
+                sourceImages: imageGalery,
+                filter: .noir,
+                qos: .userInitiated) { cgImage in
+                    for image in cgImage {
+                        self.galery.append(UIImage(cgImage: image! ))
+                    }
                     DispatchQueue.main.async {
-                        self.galery.append(UIImage(cgImage: image!))
                         self.photosCollectionView.reloadData()
                     }
+                    print("qos: userInitiated: \(Date().timeIntervalSince(self.timeThread)) secondes")
                 }
-                print("qos: userInitiated: \(Date().timeIntervalSince(self.timeThread)) secondes")
-            }
 //
 //        ImageProcessor().processImagesOnThread(
 //            sourceImages: imageGalery,
@@ -151,7 +151,8 @@ extension PhotosViewController: UICollectionViewDelegateFlowLayout, UICollection
         }
 
 //        let album = galery[indexPath.row]
-        cellGalery.setUpPhoto(photo: galery[indexPath.item])
+        cellGalery.setUpPhoto(photo: self.galery[indexPath.item])
+        
         return cellGalery
     }
 

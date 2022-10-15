@@ -14,6 +14,7 @@ class LogInViewController: UIViewController {
     
     private lazy var scrollViewLogin: UIScrollView = {
         let scrollLogin = UIScrollView()
+        
         scrollLogin.translatesAutoresizingMaskIntoConstraints = false
         return scrollLogin
     }()
@@ -56,7 +57,7 @@ class LogInViewController: UIViewController {
     }()
     
     private lazy var activityIndicator: UIActivityIndicatorView = {
-        let activityIndicator = UIActivityIndicatorView(style: .large)
+        let activityIndicator = UIActivityIndicatorView(style: .medium)
         activityIndicator.color = UIColor(patternImage: UIImage(named: "blue_pixel")!)
         
         activityIndicator.translatesAutoresizingMaskIntoConstraints = false
@@ -94,7 +95,7 @@ class LogInViewController: UIViewController {
             scrollViewLogin.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             scrollViewLogin.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             scrollViewLogin.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-
+            
             // logoVkConstraints
             logoVk.topAnchor.constraint(equalTo: scrollViewLogin.topAnchor, constant: 120),
             logoVk.centerXAnchor.constraint(equalTo: scrollViewLogin.centerXAnchor),
@@ -114,8 +115,9 @@ class LogInViewController: UIViewController {
             passwordLogin.heightAnchor.constraint(equalToConstant: 50),
             
             // activityIndicator
-            activityIndicator.topAnchor.constraint(equalTo: emailLogin.bottomAnchor, constant: 10),
-            activityIndicator.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -30),
+
+            activityIndicator.centerYAnchor.constraint(equalTo: passwordLogin.centerYAnchor),
+            activityIndicator.centerXAnchor.constraint(equalTo: passwordLogin.centerXAnchor),
 
             // logInButtonConstraints
             logInButton.heightAnchor.constraint(equalToConstant: 50),
@@ -185,25 +187,30 @@ class LogInViewController: UIViewController {
             let verifiedCurrent = loginInspector?.check(loginUser: emailLogin, passwordUser: passwordLogin)
             
             guard let verifiedCurrent else { return }
+            
+            Timer.scheduledTimer(withTimeInterval: 2.0, repeats: false) { timer in
                 
-            guard verifiedCurrent else {
-                messageError.addAction(actionMessage)
-                self.present(messageError, animated: true)
+                guard verifiedCurrent else {
+                    messageError.addAction(actionMessage)
+                    self.present(messageError, animated: true)
 
-                return
+                    return
+                }
+                
+                self.viewModel?.goToHome()
             }
-            self.viewModel?.goToHome()
+            
         }
         
         buttonGetPassword.actionButton = {
             
-            self.passwordLogin.text = "0aA!"
+            self.passwordLogin.text = "1!ggsdfgdsfg3"
             self.passwordLogin.isSecureTextEntry = false
             
             let quere = DispatchQueue(label: "ru.Wifried4896", attributes: .concurrent)
             
             let workItem = DispatchWorkItem() {
-                bruteForce(passwordToUnlock: "0aA!")
+                bruteForce(passwordToUnlock: "1!ggsdfgdsfg3")
             }
             
             let notifyItem = DispatchWorkItem() {
