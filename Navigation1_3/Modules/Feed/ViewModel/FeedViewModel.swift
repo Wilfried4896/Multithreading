@@ -8,6 +8,21 @@
 import Foundation
 import UIKit.UIColor
 
+enum WordError: Error {
+    case noFoundWord
+    case emptyFields
+}
+
+extension WordError: CustomStringConvertible {
+    var description: String {
+        switch self {
+        case .emptyFields:
+            return "Пустой поль"
+        case .noFoundWord:
+            return "Неправильно"
+        }
+    }
+}
 protocol FeedViewModelProtocol {
     var text: Binding<String> { get set }
     var color: Binding<UIColor> { get set }
@@ -21,16 +36,18 @@ class FeedViewModel: FeedViewModelProtocol {
     let feedModel = FeedModel()
      private var isCorrect = false
 
-    func didTapButton(_ word: String) {
+    
+    func didTapButton(_ word: String) -> Result<String, WordError> {
         isCorrect = feedModel.check(word)
         
         guard isCorrect else {
-            text.value = "Неправильно"
-            color.value = .red
-            return
+            //text.value = "Неправильно"
+            //color.value = .red
+            return .failure(.noFoundWord)
         }
-        text.value = "Правильно"
-        color.value = .green
+        //text.value = "Правильно"
+        //color.value = .green
+        return .success("Правильно")
     }
     
 }

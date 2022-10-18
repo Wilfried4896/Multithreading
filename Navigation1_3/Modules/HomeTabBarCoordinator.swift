@@ -51,7 +51,7 @@ class HomeTabBarCoordinator: Coordinator {
         feedNavigationC.tabBarItem = feddItem
         
         tabVC.viewControllers = [feedNavigationC, profileNavigationC]
-        navigationController.viewControllers = [tabVC]
+        navigationController.pushViewController(tabVC, animated: true)
         navigationController.setNavigationBarHidden(true, animated: true)
         
         // Add the coordinator into parent's child

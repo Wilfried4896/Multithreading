@@ -43,7 +43,7 @@ class FeedViewController: UIViewController {
         view.addSubview(textFielFeed)
         view.addSubview(checkGuessButton)
         view.addSubview(statusFeedLabel)
-        binding()
+        //binding()
         checkGuessButtonVerification()
 
         NSLayoutConstraint.activate([
@@ -63,18 +63,26 @@ class FeedViewController: UIViewController {
         ])
     }
     
-    func binding() {
-        feedViewModel.text.startBind { text in
-            DispatchQueue.main.async {
-                self.statusFeedLabel.text = text
-            }
-        }
+//    func binding() {
+//        feedViewModel.text.startBind { text in
+//            DispatchQueue.main.async {
+//                self.statusFeedLabel.text = text
+//            }
+//        }
+//
+//        feedViewModel.color.startBind { color in
+//            DispatchQueue.main.async {
+//                self.statusFeedLabel.textColor = color
+//            }
+//        }
+//    }
+    
+    private func alert(_ title: String, _ message: String) {
+        let messageError = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let actionMessage = UIAlertAction(title: "OK", style: .destructive)
         
-        feedViewModel.color.startBind { color in
-            DispatchQueue.main.async {
-                self.statusFeedLabel.textColor = color
-            }
-        }
+        messageError.addAction(actionMessage)
+        self.present(messageError, animated: true)
     }
 
     private func checkGuessButtonVerification() {
@@ -82,7 +90,12 @@ class FeedViewController: UIViewController {
             
             guard let textFielFeed = self.textFielFeed.text else { return }
 
-            self.feedViewModel.didTapButton(textFielFeed)
+            switch self.feedViewModel.didTapButton(textFielFeed) {
+                case .success(let succes):
+                    self.alert("Браво", succes)
+                case.failure(let error):
+                    self.alert("🧐🧐🧐", error.description)
+            }
         }
     }
 }

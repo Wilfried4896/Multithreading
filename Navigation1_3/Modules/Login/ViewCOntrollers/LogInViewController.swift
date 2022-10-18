@@ -7,6 +7,19 @@
 
 import UIKit
 
+enum ApiError: Error {
+    case loginError
+}
+
+extension ApiError: CustomStringConvertible {
+    var description: String {
+        switch self {
+        case.loginError:
+            return "Логин или пароль некорректен"
+        }
+    }
+}
+
 class LogInViewController: UIViewController {
 
     var loginDelegate: LoginFactory?
@@ -173,33 +186,36 @@ class LogInViewController: UIViewController {
         self.scrollViewLogin.contentOffset = CGPoint(x: 0, y: 0)
     }
 
-    private func actionButton() {
+    func loadUser(_ emailLogin: String, _ passwordLogin: String) throws {
         
+        let loginInspector = self.loginDelegate?.makeLoginInspector()
+        let verifiedCurrent = loginInspector?.check(loginUser: emailLogin, passwordUser: passwordLogin)
+        
+        guard let verifiedCurrent else { return }
+        guard verifiedCurrent else {
+            throw ApiError.loginError
+        }
+        self.viewModel?.goToHome()
+    }
+    
+    private func actionButton() {
         logInButton.actionButton = {
             
             guard let emailLogin = self.emailLogin.text, let passwordLogin = self.passwordLogin.text else { return }
             
-            let messageError = UIAlertController(title: "Внимание", message: "Логин или пароль некорректен", preferredStyle: .actionSheet)
-            let actionMessage = UIAlertAction(title: "OK", style: .destructive)
-
-            let loginInspector = self.loginDelegate?.makeLoginInspector()
-            
-            let verifiedCurrent = loginInspector?.check(loginUser: emailLogin, passwordUser: passwordLogin)
-            
-            guard let verifiedCurrent else { return }
-            
-            Timer.scheduledTimer(withTimeInterval: 2.0, repeats: false) { timer in
-                
-                guard verifiedCurrent else {
-                    messageError.addAction(actionMessage)
-                    self.present(messageError, animated: true)
-
-                    return
+            Timer.scheduledTimer(withTimeInterval: 2.0, repeats: false) { _ in
+                do {
+                    try self.loadUser(emailLogin, passwordLogin)
+                } catch {
+                    if let error = error as? ApiError {
+                        let messageError = UIAlertController(title: "Внимание", message: error.description, preferredStyle: .actionSheet)
+                        let actionMessage = UIAlertAction(title: "OK", style: .destructive)
+                        
+                        messageError.addAction(actionMessage)
+                        self.present(messageError, animated: true)
+                    }
                 }
-                
-                self.viewModel?.goToHome()
             }
-            
         }
         
         buttonGetPassword.actionButton = {
